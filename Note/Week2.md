@@ -28,13 +28,13 @@ Remark: Note that for convenience reasons in this course we assume $x^{(i)}_0=1$
 ### **Gradient Descent for Multiple Variables**
 
 The gradient descent equation itself is generally the same form; we just have to repeat it for our $n$ features:
-| Gradient Descent for Multiple Variables |
-| :--: |
-| $$\begin{align*}& \text{repeat until convergence:} \; \lbrace \newline \; & \theta_j := \theta_j - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} \; & \text{for j := 0...n}\newline \rbrace\end{align*}$$ |
+|           Gradient Descent for Multiple Variables            |
+| :----------------------------------------------------------: |
+| $\begin{align*}& \text{repeat until convergence:} \; \lbrace \newline \; & \theta_j := \theta_j - \alpha \frac{1}{m} \sum\limits_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} \; & \text{for j := 0...n}\newline &\rbrace\end{align*}$ |
 
 The following image compares gradient descent with one variable to gradient descent with multiple variables:
 
-![img](assets/MYm8uqafEeaZoQ7hPZtKqg_c974c2e2953662e9578b38c7b04591ed_Screenshot-2016-11-09-09.07.04.png)
+![img](./assets/MYm8uqafEeaZoQ7hPZtKqg_c974c2e2953662e9578b38c7b04591ed_Screenshot-2016-11-09-09.07.04.png)
 
 
 
@@ -68,11 +68,11 @@ Make a plot with *number of iterations* on the x-axis. Now plot the cost functio
 
 Declare convergence if $J(θ)$ decreases by less than $\varepsilon$ in one iteration, where $\varepsilon$ is some small value such as $10^{−3}$. However in practice it's difficult to choose this threshold value.
 
-![img](assets/FEfS3aajEea3qApInhZCFg_6be025f7ad145eb0974b244a7f5b3f59_Screenshot-2016-11-09-09.35.59.png)
+![img](./assets/FEfS3aajEea3qApInhZCFg_6be025f7ad145eb0974b244a7f5b3f59_Screenshot-2016-11-09-09.35.59.png)
 
 It has been proven that if learning rate $\alpha$ is sufficiently small, then $J(θ)$ will decrease on every iteration.
 
-![img](assets/rC2jGKgvEeamBAoLccicqA_ec9e40a58588382f5b6df60637b69470_Screenshot-2016-11-11-08.55.21.png)
+![img](./assets/rC2jGKgvEeamBAoLccicqA_ec9e40a58588382f5b6df60637b69470_Screenshot-2016-11-11-08.55.21.png)
 
 To summarize:
 
@@ -111,7 +111,7 @@ $$
 $$
 > Example:
 >
-> ![img](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/dykma6dwEea3qApInhZCFg_333df5f11086fee19c4fb81bc34d5125_Screenshot-2016-11-10-10.06.16.png?expiry=1535587200000&hmac=NUbgRZmolFDbDf_T0hAlSkQPi36LygxgcOHNGI6G-VY)
+> ![img](./assets/dykma6dwEea3qApInhZCFg_333df5f11086fee19c4fb81bc34d5125_Screenshot-2016-11-10-10.06.16.png)
 
 There is no need to do feature scaling with the normal equation.
 
