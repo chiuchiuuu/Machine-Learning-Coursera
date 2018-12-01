@@ -13,9 +13,11 @@ Recall that in logistic regression, we use the following rules:
 - if $y=0$, then $h_{\theta}(x) \approx 0$ and $\Theta^Tx \ll 0$
 
 Recall the cost function for (unregularized) logistic regression:
+
 $$
 \begin{align*}J(\theta) & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log(h_\theta(x^{(i)})) - (1 - y^{(i)})\log(1 - h_\theta(x^{(i)}))\\ & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log\Big(\dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big) - (1 - y^{(i)})\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big)\end{align*}
 $$
+
 To make a support vector machine, we will modify the loss function to  [hinge loss  function](https://en.wikipedia.org/wiki/Hinge_loss) 
 
 - $\text{cost}_1(z)$ is the cost for classifying when $y=1$
@@ -27,6 +29,7 @@ To make a support vector machine, we will modify the loss function to  [hinge lo
   ![img](assets/KKNB3HtlEeaNlA6zo4Pi2Q_135a50fd32c5eb6f4bd89b22c476c45f_Svm_hinge_negative_class-1543458080016.png)
 
 we formally define them as follows (where $k$ is an arbitrary constant defining the magnitude of the slope of the line):
+
 $$
 z = \theta^Tx\\
 \text{cost}_0(z) = \max(0, k(1+z)) \\
@@ -35,13 +38,17 @@ $$
 
 
 The full cost function from (regularized) logistic regression is
+
 $$
 J(\theta) = \frac{1}{m} \sum_{i=1}^m y^{(i)}(-\log(h_\theta(x^{(i)}))) + (1 - y^{(i)})(-\log(1 - h_\theta(x^{(i)}))) + \dfrac{\lambda}{2m}\sum_{j=1}^n \Theta^2_j
 $$
+
 Now we transform this into the cost function for support vector machines:
+
 $$
-J(\theta) = C\sum_{i=1}^m y^{(i)} \ \text{cost}_1(\theta^Tx^{(i)}) + (1 - y^{(i)}) \ \text{cost}_0(\theta^Tx^{(i)}) + \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j
+J(\theta) = C\sum_{i=1}^m y^{(i)} \ \text{cost}_1(\theta^Tx^{(i)}) + (1 - y^{(i)}) \ \text{cost}_0(\theta^Tx^{(i)}) + \dfrac{1}{2}\sum_{j=1}^n \Theta_j^2
 $$
+
 modifications:
 
 1. substituting $\text{cost}_0(z)$ and $\text{cost}_1(z)$
@@ -67,24 +74,29 @@ A useful way to think about Support Vector Machines is to think of them as **Lar
 - If $y=0$, we want $\Theta^Tx \leq −1$ (not just $\lt 0$)
 
 Now when we set our constant $C$ to a very **large** value (e.g. 100,000), our optimizing function will constrain $\Theta$ such that the equation $A$ (the summation of the cost of each example) equals 0. We impose the following constraints on $\Theta$:
+
 $$
 \begin{cases}
 \Theta^T x \geq 1, & y = 1 \\
 \Theta^T x \leq -1, & y = 0 
 \end{cases}
 $$
+
 If $C$ is very large, we must choose $\Theta$ parameters such that:
 
 $$
 \sum_{i=1}^m y^{(i)}\text{cost}_1(\Theta^Tx^{(i)}) + (1 - y^{(i)})\text{cost}_0(\Theta^Tx^{(i)}) = 0
 $$
+
 This reduces our cost function to:
+
 $$
 \begin{align*}
 J(\theta) = C \cdot 0 + \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j \newline
 = \dfrac{1}{2}\sum_{j=1}^n \Theta^2_j
 \end{align*}
 $$
+
 Recall the decision boundary from logistic regression (the line separating the positive and negative examples). In SVMs, the decision boundary has the special property that it is **as far away as possible** from both the positive and the negative examples.
 
 The distance of the decision boundary to the nearest example is called the **margin**. Since SVMs maximize this margin, it is often called a **Large Margin Classifier**.

@@ -33,11 +33,14 @@ The new procedure using these two sets is then:
    $$
 
 
+
+
 This gives us a binary 0 or 1 error result based on a misclassification. The average test error for the test set is:
 
 $$
-\text{Test Error} = \dfrac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x^{(i)}_{test}), y^{(i)}_{test})
+\text{Test Error} = \dfrac{1}{m_{test}} \sum_{i=1}^{m_{test}} err(h_\Theta(x_{test}^{(i)}), y_{test}^{(i)})
 $$
+
 This gives us the proportion of the test data that was misclassified.
 
 ### Model Selection and Train/Validation/Test Sets
@@ -83,7 +86,7 @@ The is summarized in the figure below:
 
 ### Regularization and Bias/Variance
 
-![img](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/3XyCytntEeataRJ74fuL6g_3b6c06d065d24e0bf8d557e59027e87a_Screenshot-2017-01-13-16.09.36.png?expiry=1511568000000&hmac=Ga6IRFq_2nCX1D5czKeQqlYVmEeKUvJvjT-24Yij-tQ)
+![img](assets/3XyCytntEeataRJ74fuL6g_3b6c06d065d24e0bf8d557e59027e87a_Screenshot-2017-01-13-16.09.36.png)	
 
 In the figure above, we see that as $\lambda$ increases, our fit becomes more rigid. On the other hand, as $\lambda$ approaches 0, we tend to over overfit the data. So how do we choose our parameter $\lambda $to get it 'just right' ? In order to choose the model and the regularization term $\lambda$, we need to:
 

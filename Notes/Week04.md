@@ -71,38 +71,50 @@ The +1 comes from the addition in $\Theta^{(j)}$ of the "bias nodes," $x_0$ and 
 
 ### Model Representation III
 
-In this section we'll do a **vectorized implementation** of the above functions. We're going to define a new variable $z^{(j)}_k$ that encompasses the parameters inside our g function. In our previous example if we replaced by the variable $z$ for all the parameters we would get:
+In this section we'll do a **vectorized implementation** of the above functions. We're going to define a new variable $z_k^{(j)}$ that encompasses the parameters inside our g function. In our previous example if we replaced by the variable $z$ for all the parameters we would get:
+
 $$
-\begin{align*}a_1^{(2)} = g(z_1^{(2)}) \newline a_2^{(2)} = g(z_2^{(2)}) \newline a_3^{(2)} = g(z_3^{(2)}) \newline \end{align*}
+\begin{align}a_1^{(2)} = g(z_1^{(2)}) \newline a_2^{(2)} = g(z_2^{(2)}) \newline a_3^{(2)} = g(z_3^{(2)}) \newline \end{align}
 $$
+
 In other words, for layer $j=2$ and node $k$, the variable $z$ will be:
+
 $$
 z_k^{(2)} = \Theta_{k,0}^{(1)}x_0 + \Theta_{k,1}^{(1)}x_1 + \cdots + \Theta_{k,n}^{(1)}x_n
 $$
+
 The vector representation of $x$ and $z_j$ is:
+
 $$
-\begin{align*}x = \begin{bmatrix}x_0 \newline x_1 \newline\cdots \newline x_n\end{bmatrix} &z^{(j)} = \begin{bmatrix}z_1^{(j)} \newline z_2^{(j)} \newline\cdots \newline z_n^{(j)}\end{bmatrix}\end{align*}
+\begin{align}x = \begin{bmatrix}x_0 \newline x_1 \newline\cdots \newline x_n\end{bmatrix} &z^{(j)} = \begin{bmatrix}z_1^{(j)} \newline z_2^{(j)} \newline\cdots \newline z_n^{(j)}\end{bmatrix}\end{align}
 $$
+
 Setting $x=a^{(1)}$, we can rewrite the equation as:
+
 $$
 z^{(j)} = \Theta^{(j-1)}a^{(j-1)}
 $$
 
-
 Now we can get a vector of our activation nodes for layer j as follows:
+
 $$
 a^{(j)} = g(z^{(j)})
 $$
+
 Where our function g can be applied element-wise to our vector $z^{(j)}$.
 
-We can then add a bias unit (equal to 1) to layer j after we have computed $a^{(j)}$. This will be element $a^{(j)}_0$ and will be equal to 1. To compute our final hypothesis, let's first compute another z vector:
+We can then add a bias unit (equal to 1) to layer j after we have computed $a^{(j)}$. This will be element $a_0^{(j)}$ and will be equal to 1. To compute our final hypothesis, let's first compute another z vector:
+
 $$
 z^{(j+1)} = \Theta^{(j)}a^{(j)}
 $$
+
 We get this final z vector by multiplying the next theta matrix after $\Theta^{(j−1)}$ with the values of all the activation nodes we just got. This last theta matrix $\Theta^{(j)}$ will have only **one row **which is multiplied by one column $a^{(j)}$ so that our result is a single number. We then get our final result with:
+
 $$
 h_\Theta(x) = a^{(j+1)} = g(z^{(j+1)})
 $$
+
 Notice that in this **last step**, between layer j and layer j+1, we are doing **exactly the same thing** as we did in logistic regression. Adding all these intermediate layers in neural networks allows us to more elegantly produce interesting and more complex non-linear hypotheses.
 
 ## Applications
@@ -110,29 +122,35 @@ Notice that in this **last step**, between layer j and layer j+1, we are doing *
 ### Logic Gates
 
 The $\Theta^{(1)}$ matrices for AND, NOR, and OR are:
+
 $$
 \begin{align*}AND:\newline\Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20\end{bmatrix} \newline NOR:\newline\Theta^{(1)} &= \begin{bmatrix}10 & -20 & -20\end{bmatrix} \newline OR:\newline\Theta^{(1)} &= \begin{bmatrix}-10 & 20 & 20\end{bmatrix} \newline\end{align*}
 $$
 
-
 We can combine these to get the XNOR logical operator (which gives 1 if $x_1$ and $x_2$ are both 0 or both 1).
+
 $$
 \begin{align*}\begin{bmatrix}x_0 \newline x_1 \newline x_2\end{bmatrix} \rightarrow\begin{bmatrix}a_1^{(2)} \newline a_2^{(2)} \end{bmatrix} \rightarrow\begin{bmatrix}a^{(3)}\end{bmatrix} \rightarrow h_\Theta(x)\end{align*}
 $$
 
-
 For the transition between the first and second layer, we'll use a $\Theta^{(1)}$ matrix that combines the values for AND and NOR:
+
 $$
 \Theta^{(1)} =\begin{bmatrix}-30 & 20 & 20 \newline 10 & -20 & -20\end{bmatrix}
 $$
+
 For the transition between the second and third layer, we'll use a $\Theta^{(2)}$ matrix that uses the value for OR:
+
 $$
 \Theta^{(2)} =\begin{bmatrix}-10 & 20 & 20\end{bmatrix}
 $$
+
 Let's write out the values for all our nodes:
+
 $$
 \begin{align*}& a^{(2)} = g(\Theta^{(1)} \cdot x) \newline& a^{(3)} = g(\Theta^{(2)} \cdot a^{(2)}) \newline& h_\Theta(x) = a^{(3)}\end{align*}
 $$
+
 And there we have the XNOR operator using a hidden layer with two nodes! The following summarizes the above algorithm:
 
 ![img](assets/rag_zbGqEeaSmhJaoV5QvA_52c04a987dcb692da8979a2198f3d8d7_Screenshot-2016-11-23-10.28.41-1542866119218.png)

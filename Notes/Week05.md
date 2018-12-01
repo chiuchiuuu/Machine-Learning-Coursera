@@ -10,11 +10,14 @@ Let's first define a few variables that we will need to use:
 - $s_l$ = number of units (not counting bias unit) in layer $l$
 - $K$ = number of output units/classes
 
-Recall that in neural networks, we may have many output nodes. We denote $h_\Theta(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:
+Recall that in neural networks, we may have many output nodes. We denote $h_{\Theta}(x)_k$ as being a hypothesis that results in the $k^{th}$ output. Our cost function for neural networks is going to be a generalization of the one we used for logistic regression. Recall that the cost function for regularized logistic regression was:
+
 $$
 J(\theta) = - \frac{1}{m} \sum_{i=1}^m [ y^{(i)}\ \log (h_\theta (x^{(i)})) + (1 - y^{(i)})\ \log (1 - h_\theta(x^{(i)}))] + \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2
 $$
+
 For neural networks, it is going to be slightly more complicated:
+
 $$
 \begin{gather*} J(\Theta) = - \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[y^{(i)}_k \log ((h_\Theta (x^{(i)}))_k) + (1 - y^{(i)}_k)\log (1 - (h_\Theta(x^{(i)}))_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} ( \Theta_{j,i}^{(l)})^2\end{gather*}
 $$
@@ -33,13 +36,17 @@ Note:
 ### Backpropagation Algorithm
 
 "Backpropagation" is neural-network terminology for minimizing our cost function, just like what we were doing with gradient descent in logistic and linear regression. Our goal is to compute:
+
 $$
 \min_\Theta J(\Theta)
 $$
+
 That is, we want to minimize our cost function $J$ using an optimal set of parameters in theta. In this section we'll look at the equations we use to compute the partial derivative of $J(\Theta)$:
+
 $$
 \frac{\partial}{\partial \Theta_{i,j}^{(l)} }  J(\Theta)
 $$
+
 To do so, we use the following algorithm:
 
 ![img](assets/Ul6i5teoEea1UArqXEX_3g_a36fb24a11c744d7552f0fecf2fdd752_Screenshot-2017-01-10-17.13.27.png)
@@ -72,38 +79,40 @@ For training example t =1 to m:
    g'(z^{(l)}) = a^{(l)}\ .*\ (1 - a^{(l)})
    $$
 
-
-
 5. $\Delta^{(l)}_{i,j} := \Delta^{(l)}_{i,j} + a_j^{(l)} \delta_i^{(l+1)}$ or with vectorization, $\Delta^{(l)} := \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^T$
 
 Hence we update our new $\Delta$ matrix.
 
-- $D^{(l)}_{i,j} := \dfrac{1}{m}\left(\Delta^{(l)}_{i,j} + \lambda\Theta^{(l)}_{i,j} \right)$
-- $D^{(l)}_{i,j} := \dfrac{1}{m}\Delta^{(l)}_{i,j}$
+- $D_{i,j}^{(l)} := \dfrac{1}{m}\left(\Delta_{i,j}^{(l)} + \lambda\Theta_{i,j}^{(l)} \right)$
+- $D_{i,j}^{(l)} := \dfrac{1}{m}\Delta_{i,j}^{(l)}$
 
 The capital-delta matrix D is used as an "accumulator" to add up our values as we go along and eventually compute our partial derivative. Thus we get $\dfrac \partial {\partial \Theta_{ij}^{(l)}} J(\Theta)$
 
 ### Backpropagation Intuition
 
 Recall that the cost function for a neural network is:
+
 $$
 \begin{gather*}J(\Theta) = - \frac{1}{m} \sum_{t=1}^m\sum_{k=1}^K \left[ y^{(t)}_k \ \log (h_\Theta (x^{(t)}))_k + (1 - y^{(t)}_k)\ \log (1 - h_\Theta(x^{(t)})_k)\right] + \frac{\lambda}{2m}\sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_l+1} ( \Theta_{j,i}^{(l)})^2\end{gather*}
 $$
+
 If we consider simple non-multiclass classification (k = 1) and disregard regularization, the cost is computed with:
+
 $$
 cost(t) =y^{(t)} \ \log (h_\Theta (x^{(t)})) + (1 - y^{(t)})\ \log (1 - h_\Theta(x^{(t)}))
 $$
+
 Intuitively, $\delta^{(l)}_j$ is the "error" for $a^{(l)}_j$ (unit $j$ in layer $l$). More formally, the delta values are actually the derivative of the cost function:
+
 $$
 \delta_j^{(l)} = \dfrac{\partial}{\partial z_j^{(l)}} cost(t)
 $$
+
 Recall that our derivative is the slope of a line tangent to the cost function, so the steeper the slope the more incorrect we are. Let us consider the following neural network below and see how we could calculate some $\delta^{(l)}_j​$:
 
 ![img](assets/qc309rdcEea4MxKdJPaTxA_324034f1a3c3a3be8e7c6cfca90d3445_fixx.png)
 
-In the image above, to calculate $\delta_2^{(2)}$, we multiply the weights $\Theta_{12}^{(2)}$ and $\Theta_{22}^{(2)}$ by their respective $\delta$ values found to the right of each edge. So we get $\delta_2^{(2)} = \Theta_{12}^{(2)} \delta^{(3)}_1 + \Theta_{22}^{(2)} \delta^{(3)}_2$. To calculate every single possible $\delta^{(l)}_j$, we could start from the right of our diagram. We can think of our edges as our $\Theta_{ij}$. Going from right to left, to calculate the value of $\delta^{(l)}_j$, you can just take the over all sum of each weight times the δ it is coming from.
-
-
+In the image above, to calculate $\delta_2^{(2)}$, we multiply the weights $\Theta_{12}^{(2)}$ and $\Theta_{22}^{(2)}$ by their respective $\delta$ values found to the right of each edge. So we get $\delta_2^{(2)} = \Theta_{12}^{(2)} \delta_1^{(3)} + \Theta_{22}^{(2)} \delta_2^{(3)}$. To calculate every single possible $\delta_j^{(l)}$, we could start from the right of our diagram. We can think of our edges as our $\Theta_{ij}$. Going from right to left, to calculate the value of $\delta_j^{(l)}$, you can just take the over all sum of each weight times the $\delta$ it is coming from.
 
 ## Backpropagation in Practice
 
@@ -130,7 +139,7 @@ Theta3 = reshape(thetaVector(221:231),1,11)
 
 To summarize:
 
-![img](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/kdK7ubT2EeajLxLfjQiSjg_d35545b8d6b6940e8577b5a8d75c8657_Screenshot-2016-11-27-15.09.24.png?expiry=1511136000000&hmac=qXqQPsRZ1C630MtSKyiS2eb-cMCz98ZOuHvx9YJTrJs)
+![img](assets/kdK7ubT2EeajLxLfjQiSjg_d35545b8d6b6940e8577b5a8d75c8657_Screenshot-2016-11-27-15.09.24.png)
 
 ### Gradient Checking
 
@@ -165,7 +174,7 @@ Once you have verified **once** that your backpropagation algorithm is correct, 
 
 Initializing all theta weights to zero does not work with neural networks. When we backpropagate, all nodes will update to the same value repeatedly. Instead we can randomly initialize our weights for our $\Theta# matrices using the following method:
 
-![img](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/y7gaS7pXEeaCrQqTpeD5ng_8868ccda2c387f5d481d0c54ab78a86e_Screen-Shot-2016-12-04-at-11.27.28-AM.png?expiry=1511136000000&hmac=qjNlKmQ99OYsVaJ8GjxZFKp1hxCHyYgvN9k5ZSX5lj8)
+![img](assets/y7gaS7pXEeaCrQqTpeD5ng_8868ccda2c387f5d481d0c54ab78a86e_Screen-Shot-2016-12-04-at-11.27.28-AM.png)
 
 Hence, we initialize each $\Theta^{(l)}_{ij}$ to a random value between $[−\varepsilon, \varepsilon]$. Using the above formula guarantees that we get the desired bound. The same procedure applies to all the $\Theta$'s. Below is some working code you could use to experiment.
 
@@ -208,7 +217,7 @@ for i = 1:m,
 
 The following image gives us an intuition of what is happening as we are implementing our neural network:
 
-![img](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/hGk18LsaEea7TQ6MHcgMPA_8de173808f362583eb39cdd0c89ef43e_Screen-Shot-2016-12-05-at-10.40.35-AM.png?expiry=1511136000000&hmac=9wxlXyqKKAFQWJthVYVbqH_OHXCBUbKWgAEGa6bhLN8)
+![img](assets/hGk18LsaEea7TQ6MHcgMPA_8de173808f362583eb39cdd0c89ef43e_Screen-Shot-2016-12-05-at-10.40.35-AM.png)
 
 Ideally, you want $h_\Theta(x^{(i)}) \approx y^{(i)}$. This will minimize our cost function. However, keep in mind that $J(\Theta)$ is not convex and thus we can end up in a local minimum instead.
 
