@@ -127,22 +127,22 @@ supplement
 
     $$
     \begin{aligned}
-    g'(z) & = \frac{d}{dz}\frac{1}{1+e^{-z}} \\
-    & = \frac{1}{(1+e^{-z})^2} (e^{-z}) \\
-    & = \frac{1}{(1+e^{-z})} \cdot \left (1 - \frac{1}{(1+e^{-z})} \right) \\
+    g'(z) & = \frac{d}{dz}\frac{1}{1+e^{-z}} \newline
+    & = \frac{1}{(1+e^{-z})^2} (e^{-z}) \newline
+    & = \frac{1}{(1+e^{-z})} \cdot \left (1 - \frac{1}{(1+e^{-z})} \right) \newline
     & = g(z)(1-g(z))
-    \end{align}
+    \end{aligned}
     $$
 
 - partial derivative of $J(\theta_j)$ 
 
     $$
-    \begin{aligned}
+    \begin{align*}
     \frac{\partial}{\partial\theta_j}J(\theta_j) & = -\left( y{\frac{1}{g(\theta^Tx)} - (1-y)\frac{1}{1-g(\theta^Tx)}} \right) \frac{\partial}{\partial\theta_j} g(\theta^Tx) \\
     & =  -\left( y{\frac{1}{g(\theta^Tx)} - (1-y)\frac{1}{1-g(\theta^Tx)}} \right) g(\theta^Tx) (1 - g(\theta^Tx)) \frac{\partial}{\partial\theta_j} \theta^Tx) \\
     & = - \left( y(1-g(\theta^Tx)) - (1-y)g(\theta^Tx) \right) x_j \\
     & = (h_\theta (x) - y)x_j
-    \end{aligned}
+    \end{align*}
     $$
 
 
