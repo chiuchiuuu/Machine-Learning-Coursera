@@ -15,7 +15,10 @@ Recall that in logistic regression, we use the following rules:
 Recall the cost function for (unregularized) logistic regression:
 
 $$
-\begin{align*}J(\theta) & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log(h_\theta(x^{(i)})) - (1 - y^{(i)})\log(1 - h_\theta(x^{(i)}))\\ & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log\Big(\dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big) - (1 - y^{(i)})\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big)\end{align*}
+\begin{align*}
+J(\theta) & = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log(h_\theta(x^{(i)})) - (1 - y^{(i)})\log(1 - h_\theta(x^{(i)}))\newline
+& = \frac{1}{m}\sum_{i=1}^m -y^{(i)} \log\Big(\dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big) - (1 - y^{(i)})\log\Big(1 - \dfrac{1}{1 + e^{-\theta^Tx^{(i)}}}\Big)
+\end{align*}
 $$
 
 To make a support vector machine, we will modify the loss function to  [hinge loss  function](https://en.wikipedia.org/wiki/Hinge_loss) 
@@ -46,7 +49,7 @@ $$
 Now we transform this into the cost function for support vector machines:
 
 $$
-J(\theta) = C\sum_{i=1}^m y^{(i)} \ \text{cost}_1(\theta^Tx^{(i)}) + (1 - y^{(i)}) \ \text{cost}_0(\theta^Tx^{(i)}) + \dfrac{1}{2}\sum_{j=1}^n \Theta_j^2
+J(\theta) = C\sum_{i=1}^m y^{(i)}{\text{cost}_1}(\theta^T x^{(i)}) + (1 - y^{(i)}) {\text{cost}_0}(\theta^T x^{(i)}) + \dfrac{1}{2}\sum_{j=1}^n \Theta_j^2
 $$
 
 modifications:

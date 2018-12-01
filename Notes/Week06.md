@@ -23,7 +23,7 @@ The new procedure using these two sets is then:
 
 #### The test set error
 
-1. For linear regression: $J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x^{(i)}_{test}) - y^{(i)}_{test})^2$
+1. For linear regression: $J_{test}(\Theta) = \dfrac{1}{2m_{test}} \sum_{i=1}^{m_{test}}(h_\Theta(x_{test}^{(i)}) - y_{test}^{(i)})^2$
 
 2. For classification ~ Misclassification error (aka 0/1 misclassification error):
    $$
@@ -31,6 +31,7 @@ The new procedure using these two sets is then:
    \begin{cases} 1 & \mbox{if } h_\Theta(x) \geq 0.5\ and\ y = 0\ or\ h_\Theta(x) < 0.5\ and\ y = 1\newline 0 & \mbox otherwise 
    \end{cases}
    $$
+
 
 
 
