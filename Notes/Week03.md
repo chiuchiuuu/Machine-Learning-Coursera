@@ -137,12 +137,12 @@ supplement
 - partial derivative of $J(\theta_j)$ 
 
     $$
-    \begin{align*}
-    \frac{\partial}{\partial\theta_j}J(\theta_j) & = -\left( y{\frac{1}{g(\theta^Tx)} - (1-y)\frac{1}{1-g(\theta^Tx)}} \right) \frac{\partial}{\partial\theta_j} g(\theta^Tx) \\
-    & =  -\left( y{\frac{1}{g(\theta^Tx)} - (1-y)\frac{1}{1-g(\theta^Tx)}} \right) g(\theta^Tx) (1 - g(\theta^Tx)) \frac{\partial}{\partial\theta_j} \theta^Tx) \\
-    & = - \left( y(1-g(\theta^Tx)) - (1-y)g(\theta^Tx) \right) x_j \\
+    \begin{aligned}
+    \frac{\partial}{\partial\theta_j}J(\theta_j) & = -\left( y{\frac{1}{g(\theta^Tx)} - (1-y)\frac{1}{1-g(\theta^Tx)}} \right) \frac{\partial}{\partial\theta_j} g(\theta^Tx) \newline
+    & =  -\left( y{\frac{1}{g(\theta^Tx)} - (1-y)\frac{1}{1-g(\theta^Tx)}} \right) g(\theta^Tx) (1 - g(\theta^Tx)) \frac{\partial}{\partial\theta_j} \theta^Tx) \newline
+    & = - \left( y(1-g(\theta^Tx)) - (1-y)g(\theta^Tx) \right) x_j \newline
     & = (h_\theta (x) - y)x_j
-    \end{align*}
+    \end{aligned}
     $$
 
 
